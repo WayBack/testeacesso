@@ -1,0 +1,45 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Teste</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+</head>
+
+<body  onLoad="">
+<input type="button" onClick="javascript:connect();" value="Executa conexão">
+
+
+<script language="javascript">
+		function connect(){
+							//var connString = "DRIVER=SQL Server;UID=waycob_user;Address=192.168.0.140\sqlnetsystem;Network=wayback;DATABASE=wb;SERVER=192.168.0.140\sqlnetsystem;Password=info0939";
+							//var connString = "DRIVER=SQL Server;Data Source=192.168.0.140,1331;Initial Catalog=wb;Persist Security Info=True;User ID=waycob_user;Password=info0939"
+							var connString ="Driver={SQL Server};Server=191.241.226.226,1300;Database=wb;Uid=waycob_user;Pwd=info0939";
+							//var connString = "Driver={Microsoft Access Driver (*.mdb)};C:\ScriptJava\DB.mdb;Uid=Admin;Pwd=;";
+							//var connString = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=DB.mdb;Persist Security Info=True;";
+							//var connString = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=DB.mdb;"
+							//var connString = "DRIVER={Microsoft Access Driver (*.mdb)}; DBQ=C:\\FEWAY\\root\\WS\\DB.mdb"
+							//var connString = 	"UID=Admin;PWD=;driver={Microsoft Access Driver (*.mdb)}; DefaultDir=C:\ScriptJava\; DBQ=C:\\ScriptJava\\DB.mdb; OLE DB Services = -2;"
+
+								 				
+							
+								try {
+									var ObjConn = new ActiveXObject("ADODB.CONNECTION");
+									ObjConn.open( connString );
+								    var rs = new ActiveXObject("ADODB.Recordset");
+								    var rs = ObjConn.execute("select ID_status, DEScricao from tb_status");
+								} catch (e) {
+								    alert("ADODB namespace not found."+e );
+								    return;
+								}
+							
+							
+							while(!rs.eof){
+											document.write(rs.fields("id_status").value + " - "+rs.fields("DEScricao").value+"<br/>");
+											rs.MoveNext();
+										  }
+							rs.close();
+							ObjConn.close();
+							}
+</script>
+</body>
+</html>
